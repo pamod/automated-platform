@@ -1,0 +1,14 @@
+map_S_root_S_body = function(){ 
+var outputbody={};
+
+outputbody =  {};
+outputbody.p_insert_tbl_orders_operation =  {};
+outputbody.p_insert_tbl_orders_operation.xs_id = inputroot.Order.ID;
+outputbody.p_insert_tbl_orders_operation.xs_name = inputroot.Order.Name;
+outputbody.p_insert_tbl_orders_operation.xs_description = inputroot.Order.Description;
+return outputbody;
+};
+
+
+
+

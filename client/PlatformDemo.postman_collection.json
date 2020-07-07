@@ -1,0 +1,527 @@
+{
+	"info": {
+		"_postman_id": "04b4fb63-9243-4173-a6f3-a02f076cef7b",
+		"name": "PlatformDemo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "OrderMgtSvcEp",
+			"item": [
+				{
+					"name": "svc_rest_bal_orderMgt",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Order\": {\n        \"ID\": \"100500\",\n        \"Name\": \"XYZ\",\n        \"Description\": \"Sample order.\"\n    }\n}"
+						},
+						"url": {
+							"raw": "http://localhost:9090/ordermgt/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"ordermgt",
+								"order"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "svc_rest_bal_orderMgt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:9090/ordermgt/order/100500",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9090",
+							"path": [
+								"ordermgt",
+								"order",
+								"100500"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "OrderMgtDataSvcEp",
+			"item": [
+				{
+					"name": "svc_insert_order",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/xml",
+								"type": "text"
+							},
+							{
+								"key": "SOAPAction",
+								"value": "insert_tbl_orders_operation",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<body>\n   <p:insert_tbl_orders_operation xmlns:p=\"http://ws.wso2.org/dataservice\">\n      <xs:id xmlns:xs=\"http://ws.wso2.org/dataservice\">#fhhf46658595</xs:id>\n      <xs:name xmlns:xs=\"http://ws.wso2.org/dataservice\">Papers</xs:name>\n      <xs:description xmlns:xs=\"http://ws.wso2.org/dataservice\">customized paper bundle</xs:description>\n   </p:insert_tbl_orders_operation>\n</body>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8281/services/OrderManagementDataService",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8281",
+							"path": [
+								"services",
+								"OrderManagementDataService"
+							]
+						},
+						"description": "Inserts an order to the database"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "OrderMgt__ESB_EP",
+			"item": [
+				{
+					"name": "PlaceOrder",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"Order\": {\n        \"ID\": \"100500\",\n        \"Name\": \"XYZ\",\n        \"Description\": \"Sample order.\"\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8281/order",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8281",
+							"path": [
+								"order"
+							]
+						},
+						"description": "Places an order with an ESB endpoint. As a result ESB would dispatch a request between order service and data service endpoints"
+					},
+					"response": []
+				},
+				{
+					"name": "GetOrder",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:8281/order/view/100500",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8281",
+							"path": [
+								"order",
+								"view",
+								"100500"
+							]
+						},
+						"description": "Get Order by Providing the ID"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "OrderMgt__APIM_EP",
+			"item": [
+				{
+					"name": "OrderMgt_APIM_Micro",
+					"item": [
+						{
+							"name": "PlaceOrder",
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IlpqUm1ZVE13TlRKak9XVTVNbUl6TWpnek5ESTNZMkl5TW1JeVkyRXpNamRoWmpWaU1qYzBaZz09In0.eyJhdWQiOiJodHRwOlwvXC9vcmcud3NvMi5hcGltZ3RcL2dhdGV3YXkiLCJzdWIiOiJhZG1pbkBjYXJib24uc3VwZXIiLCJhcHBsaWNhdGlvbiI6eyJvd25lciI6ImFkbWluIiwidGllciI6IjEwUGVyTWluIiwibmFtZSI6Ik9yZGVyTWFuYWdlbWVudEFwcGxpY2F0aW9uIiwiaWQiOjE5LCJ1dWlkIjpudWxsfSwic2NvcGUiOiJhbV9hcHBsaWNhdGlvbl9zY29wZSBhcGlfd3JpdGUiLCJpc3MiOiJodHRwczpcL1wvbG9jYWxob3N0Ojk0NDNcL29hdXRoMlwvdG9rZW4iLCJ0aWVySW5mbyI6eyJEZW1vIjp7InN0b3BPblF1b3RhUmVhY2giOnRydWUsInNwaWtlQXJyZXN0TGltaXQiOi0xLCJzcGlrZUFycmVzdFVuaXQiOiJOQSJ9fSwia2V5dHlwZSI6IlBST0RVQ1RJT04iLCJzdWJzY3JpYmVkQVBJcyI6W3sic3Vic2NyaWJlclRlbmFudERvbWFpbiI6ImNhcmJvbi5zdXBlciIsIm5hbWUiOiJPcmRlck1hbmFnZW1lbnRBUEkiLCJjb250ZXh0IjoiXC9vcmRlclwvMS4wLjAiLCJwdWJsaXNoZXIiOiJhZG1pbiIsInZlcnNpb24iOiIxLjAuMCIsInN1YnNjcmlwdGlvblRpZXIiOiJEZW1vIn1dLCJjb25zdW1lcktleSI6Im9VM1psdTViM1oyRmsyMWN2Q0pwamw3aTl3Y2EiLCJleHAiOjE1ODg2NDkxMzMsImlhdCI6MTU4ODY0NTUzMywianRpIjoiNDFiNTAyZTgtMWFjMC00Zjk5LWEwODYtZjA1YjM0MDg1MGJmIn0.FKCoQR-LpYY_ica_WHSJVGnOTJptnsagnOpgiIewJNNCLkGUzBCzcAA_aaSQwq-0rkhKTEqqOxcIVH3rXxp2qbSPXRYWV4DnU3tpUAVTafCXohgKZPG-r6bovAuUvWOC1GBTs3PWSMirZGnSfH4vusRhhDYZokEuiGyEj3XehMD0K5VlstKkLTx0vg8_zzqTGeEcxbw-Ck01RWsGglXpt10hory1GClwegMUP4bLyGIP_1nL-puaCD34PNXSaBX34KGNKgj-GSNaYM1q1d7z6AcsiEbMfnPdPjduE9yuj41RI-yYhEcXYIYhieUE08k3QtLLnd8Pjg8AQ8lLcS4GPA",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Order\": {\n        \"ID\": \"100504\",\n        \"Name\": \"XYZ\",\n        \"Description\": \"Sample order.\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4040/order/1.0.0",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4040",
+									"path": [
+										"order",
+										"1.0.0"
+									]
+								},
+								"description": "Place order securely via APIM"
+							},
+							"response": []
+						},
+						{
+							"name": "PlaceOrder - XML",
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IlpqUm1ZVE13TlRKak9XVTVNbUl6TWpnek5ESTNZMkl5TW1JeVkyRXpNamRoWmpWaU1qYzBaZz09In0.eyJhdWQiOiJodHRwOlwvXC9vcmcud3NvMi5hcGltZ3RcL2dhdGV3YXkiLCJzdWIiOiJhZG1pbkBjYXJib24uc3VwZXIiLCJhcHBsaWNhdGlvbiI6eyJvd25lciI6ImFkbWluIiwidGllciI6IjEwUGVyTWluIiwibmFtZSI6Ik9yZGVyTWFuYWdlbWVudEFwcGxpY2F0aW9uIiwiaWQiOjE5LCJ1dWlkIjpudWxsfSwic2NvcGUiOiJhbV9hcHBsaWNhdGlvbl9zY29wZSBhcGlfd3JpdGUiLCJpc3MiOiJodHRwczpcL1wvbG9jYWxob3N0Ojk0NDNcL29hdXRoMlwvdG9rZW4iLCJ0aWVySW5mbyI6eyJEZW1vIjp7InN0b3BPblF1b3RhUmVhY2giOnRydWUsInNwaWtlQXJyZXN0TGltaXQiOi0xLCJzcGlrZUFycmVzdFVuaXQiOiJOQSJ9fSwia2V5dHlwZSI6IlBST0RVQ1RJT04iLCJzdWJzY3JpYmVkQVBJcyI6W3sic3Vic2NyaWJlclRlbmFudERvbWFpbiI6ImNhcmJvbi5zdXBlciIsIm5hbWUiOiJPcmRlck1hbmFnZW1lbnRBUEkiLCJjb250ZXh0IjoiXC9vcmRlclwvMS4wLjAiLCJwdWJsaXNoZXIiOiJhZG1pbiIsInZlcnNpb24iOiIxLjAuMCIsInN1YnNjcmlwdGlvblRpZXIiOiJEZW1vIn1dLCJjb25zdW1lcktleSI6Im9VM1psdTViM1oyRmsyMWN2Q0pwamw3aTl3Y2EiLCJleHAiOjE1ODg2NTMxNTksImlhdCI6MTU4ODY0OTU1OSwianRpIjoiOGFkYWNhYmMtMzM3NS00ZWE4LTliOGMtNTJlYTQ2NmZjYjAwIn0.EZg--iY-JpZfdc_P5B6AwccoVfYYmvVRSVX99WqgCU36x_fUGtzP7C84x8YPoMH3gOCFKHAwcuDW7stjkittaehI58s0D7SscunHpus9vNxoecCOXscnunXG5hQysPLb65XMYbhAgK1dKCf0Ut3NfctxQfgFt6SSh7X0UabDbmo2UDUgekihS7MsXJ4EnSRvxPHM2Jh6hfbUfcSA25TRvkrfYjiztmGH7fA-zxSvGwYDEs9nT6m_PiqxyFbG1gUF2QDvIQR0W7tZGtSKCTvtf-meXQoYGMrNFwPKSSde-tPx3BXOOa6J9iK8NXerIhDtB0jB12VnGp6LdGzXu2s6-g",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"type": "text",
+										"value": "application/xml"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "<Order>\n  <ID>100504</ID>\n  <Name>XYZ</Name>\n  <Description>Sample order.</Description>\n</Order>",
+									"options": {
+										"raw": {
+											"language": "xml"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:4040/order/1.0.0",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "4040",
+									"path": [
+										"order",
+										"1.0.0"
+									]
+								},
+								"description": "Place order securely via APIM"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "OrderMgt-viaESBEP",
+					"item": [
+						{
+							"name": "PlaceOrder",
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IlpqUm1ZVE13TlRKak9XVTVNbUl6TWpnek5ESTNZMkl5TW1JeVkyRXpNamRoWmpWaU1qYzBaZz09In0.eyJhdWQiOiJodHRwOlwvXC9vcmcud3NvMi5hcGltZ3RcL2dhdGV3YXkiLCJzdWIiOiJhZG1pbkBjYXJib24uc3VwZXIiLCJhcHBsaWNhdGlvbiI6eyJvd25lciI6ImFkbWluIiwidGllciI6IjEwUGVyTWluIiwibmFtZSI6Ik9yZGVyTWFuYWdlbWVudEFwcGxpY2F0aW9uIiwiaWQiOjE5LCJ1dWlkIjpudWxsfSwic2NvcGUiOiJhbV9hcHBsaWNhdGlvbl9zY29wZSBhcGlfd3JpdGUiLCJpc3MiOiJodHRwczpcL1wvbG9jYWxob3N0Ojk0NDNcL29hdXRoMlwvdG9rZW4iLCJ0aWVySW5mbyI6eyJEZW1vIjp7InN0b3BPblF1b3RhUmVhY2giOnRydWUsInNwaWtlQXJyZXN0TGltaXQiOi0xLCJzcGlrZUFycmVzdFVuaXQiOiJOQSJ9fSwia2V5dHlwZSI6IlBST0RVQ1RJT04iLCJzdWJzY3JpYmVkQVBJcyI6W3sic3Vic2NyaWJlclRlbmFudERvbWFpbiI6ImNhcmJvbi5zdXBlciIsIm5hbWUiOiJPcmRlck1hbmFnZW1lbnRBUEkiLCJjb250ZXh0IjoiXC9vcmRlclwvMS4wLjAiLCJwdWJsaXNoZXIiOiJhZG1pbiIsInZlcnNpb24iOiIxLjAuMCIsInN1YnNjcmlwdGlvblRpZXIiOiJEZW1vIn1dLCJjb25zdW1lcktleSI6Im9VM1psdTViM1oyRmsyMWN2Q0pwamw3aTl3Y2EiLCJleHAiOjE1ODgyNTI3MTQsImlhdCI6MTU4ODI0OTExNCwianRpIjoiMGY2MjY1MzMtOGQyMC00ZmIyLTlhMDItZTE1NDVjOTY3MzMyIn0.cYYyDrYInVfLq3v1HR2aOEC7JxiO3CtAVpOAqzRXvSEPFcYJD0KvonGOF3D7S70mDM1B5Dy-vPDwqklbLFFIpDypjnSq4vilHOknDOQ12Ke-yDigzvQV_AkYQW4mzE_ryv8bkjPbnDpaQabR5bA0kfRBYREbgMz4qYhLUvf_-xlfQ5n7UM91Kx08i2gfTJE2Kqn0noFJ6Tfd0YlhOkQx2cIQdtmqeDEF_iBv65_oExNOu1ZuFtEwz1mJCVEbCfHxHIcfD_0aSKEqd84WxAXkC0xzj9ZadIHfbqeMhhxQuAX9mHTti3nlK5W6FeRDddewFMnHu6sHvRA2UzFvS7P5kw",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Order\": {\n        \"ID\": \"100504\",\n        \"Name\": \"XYZ\",\n        \"Description\": \"Sample order.\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:8243/order/1.0.0",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8243",
+									"path": [
+										"order",
+										"1.0.0"
+									]
+								},
+								"description": "Place order securely via APIM"
+							},
+							"response": []
+						},
+						{
+							"name": "GetOrder",
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IlpqUm1ZVE13TlRKak9XVTVNbUl6TWpnek5ESTNZMkl5TW1JeVkyRXpNamRoWmpWaU1qYzBaZz09In0.eyJhdWQiOiJodHRwOlwvXC9vcmcud3NvMi5hcGltZ3RcL2dhdGV3YXkiLCJzdWIiOiJicm93bkBjYXJib24uc3VwZXIiLCJhcHBsaWNhdGlvbiI6eyJvd25lciI6ImJyb3duIiwidGllciI6IjEwUGVyTWluIiwibmFtZSI6Ik9yZGVyTWFuYWdlbWVudEFwcGxpY2F0aW9uIiwiaWQiOjYsInV1aWQiOm51bGx9LCJzY29wZSI6ImFtX2FwcGxpY2F0aW9uX3Njb3BlIGRlZmF1bHQiLCJpc3MiOiJodHRwczpcL1wvbG9jYWxob3N0Ojk0NDNcL29hdXRoMlwvdG9rZW4iLCJ0aWVySW5mbyI6eyJEZW1vIjp7InN0b3BPblF1b3RhUmVhY2giOnRydWUsInNwaWtlQXJyZXN0TGltaXQiOi0xLCJzcGlrZUFycmVzdFVuaXQiOiJOQSJ9fSwia2V5dHlwZSI6IlBST0RVQ1RJT04iLCJzdWJzY3JpYmVkQVBJcyI6W3sic3Vic2NyaWJlclRlbmFudERvbWFpbiI6ImNhcmJvbi5zdXBlciIsIm5hbWUiOiJPcmRlck1hbmFnZW1lbnRBUEkiLCJjb250ZXh0IjoiXC9vcmRlclwvMS4wLjAiLCJwdWJsaXNoZXIiOiJhZG1pbiIsInZlcnNpb24iOiIxLjAuMCIsInN1YnNjcmlwdGlvblRpZXIiOiJEZW1vIn1dLCJjb25zdW1lcktleSI6IjZnMk15WWtIcVBNWFd3RXU4Y3BKY1RfQlZMSWEiLCJleHAiOjE1ODU4MjE3NzUsImlhdCI6MTU4NTgxODE3NSwianRpIjoiNjQwZTI3NTAtYTY1Yi00NDA4LWI4NjEtYTg3ZjhmNzAxNjQxIn0.PckMF7x2DnxMF6XLFqnS8ptp6gY6bUFg_wtqcpMrIenxXTgkhDa8qp9DvVfk4X6nF7toVbaL7uXGy9F_IeK1HwdJAtIgMU3RH7672RDQqp4ksvgp1ZzvZXm5xXY5vNhIrcmnfw0-grXBmxuoFBaXAlP_Bb21XqNJvtkLoLGnmttz4zGSGs1hfGcmhuo6Us9lfng9zsWNOw0bdi7KAUmHUvfxVh1sk6oLhch65xT4bwJIpJqSzVkLZQ_vxwNfwLrl7sgBiWFxetEgYeUG3QSKnXUeLYzA5TkbFMKUabp11a8JrsAucpx6dvj5aRlohczvb1yiFo7CzVestr4M1BmAqw",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://localhost:8243/order/view/100504",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8243",
+									"path": [
+										"order",
+										"view",
+										"100504"
+									]
+								},
+								"description": "Get order placed with the system"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "OrderMgt-InventorySvc",
+					"item": [
+						{
+							"name": "Add Inventory",
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IlpqUm1ZVE13TlRKak9XVTVNbUl6TWpnek5ESTNZMkl5TW1JeVkyRXpNamRoWmpWaU1qYzBaZz09In0.eyJhdWQiOiJodHRwOlwvXC9vcmcud3NvMi5hcGltZ3RcL2dhdGV3YXkiLCJzdWIiOiJhZG1pbkBjYXJib24uc3VwZXIiLCJhcHBsaWNhdGlvbiI6eyJvd25lciI6ImFkbWluIiwidGllciI6IjEwUGVyTWluIiwibmFtZSI6IkludmVudG9yeU1ndEFwcGxpY2F0aW9uIiwiaWQiOjMxLCJ1dWlkIjpudWxsfSwic2NvcGUiOiJhbV9hcHBsaWNhdGlvbl9zY29wZSBkZWZhdWx0IiwiaXNzIjoiaHR0cHM6XC9cL2xvY2FsaG9zdDo5NDQzXC9vYXV0aDJcL3Rva2VuIiwidGllckluZm8iOnsiRGVtbyI6eyJzdG9wT25RdW90YVJlYWNoIjp0cnVlLCJzcGlrZUFycmVzdExpbWl0IjotMSwic3Bpa2VBcnJlc3RVbml0IjoiTkEifX0sImtleXR5cGUiOiJQUk9EVUNUSU9OIiwic3Vic2NyaWJlZEFQSXMiOlt7InN1YnNjcmliZXJUZW5hbnREb21haW4iOiJjYXJib24uc3VwZXIiLCJuYW1lIjoiSW52ZW50b3J5TWd0QVBJIiwiY29udGV4dCI6IlwvaW52ZW50b3J5XC8xLjAuMCIsInB1Ymxpc2hlciI6ImFkbWluIiwidmVyc2lvbiI6IjEuMC4wIiwic3Vic2NyaXB0aW9uVGllciI6IkRlbW8ifV0sImNvbnN1bWVyS2V5IjoiaXlkY2RtQm1sNzBfZFkweld2NWFvOE13R3RFYSIsImV4cCI6MTU5MjUzNzQyNCwiaWF0IjoxNTkyNTMzODI0LCJqdGkiOiI3MmFmYzRmOC0yODcxLTQ2ZjItYWExNS02ZDRhYzI3YTgzZDMifQ.egrWKdFtW20Ebn8VKaYdfzWWcTSagLyrkTXX1eTTUNnpl_CUpu-Kmcghma1YLRjhPWWuzEH8_VUN0z7UyvqK3o9PCjHmEqTJ_yGYYStbURlctK1VpnmnA3gkW5pfEXE09Es61n_3okGkuqrXwGtZTf6vivfxQ_xueWJZl1nY25QFNRdnVof-eee3zbCuP6S4vdlmH7aUtfCbc3zVN_mqN-5Sh7mLwdACp4xJ03w8GBqDYynyEDxYEuLfOuRVUT7BOSYX6Tm-WP_A8disSf2QAkeK_yNrak9teJ-5Rbt6KNE1E3LBsi9YABomzNdICdf00IF29uEHuj6RVo294BePKQ",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Order\": {\n        \"ID\": \"345789\",\n        \"Name\": \"XYZ\",\n        \"Description\": \"Sample order.\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:8243/inventory/1.0.0",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8243",
+									"path": [
+										"inventory",
+										"1.0.0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Inventory",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "oauth2",
+									"oauth2": [
+										{
+											"key": "accessToken",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6IlpqUm1ZVE13TlRKak9XVTVNbUl6TWpnek5ESTNZMkl5TW1JeVkyRXpNamRoWmpWaU1qYzBaZz09In0.eyJhdWQiOiJodHRwOlwvXC9vcmcud3NvMi5hcGltZ3RcL2dhdGV3YXkiLCJzdWIiOiJicm93bkBjYXJib24uc3VwZXIiLCJhcHBsaWNhdGlvbiI6eyJvd25lciI6ImJyb3duIiwidGllciI6IjEwUGVyTWluIiwibmFtZSI6Ik9yZGVySW52ZXJ0b3J5U2VydmljZVRlc3RBcHAiLCJpZCI6MjIsInV1aWQiOm51bGx9LCJzY29wZSI6ImFtX2FwcGxpY2F0aW9uX3Njb3BlIHdyaXRlX2FjY2VzcyIsImlzcyI6Imh0dHBzOlwvXC9sb2NhbGhvc3Q6OTQ0M1wvb2F1dGgyXC90b2tlbiIsInRpZXJJbmZvIjp7IkRlbW8iOnsic3RvcE9uUXVvdGFSZWFjaCI6dHJ1ZSwic3Bpa2VBcnJlc3RMaW1pdCI6LTEsInNwaWtlQXJyZXN0VW5pdCI6Ik5BIn19LCJrZXl0eXBlIjoiUFJPRFVDVElPTiIsInN1YnNjcmliZWRBUElzIjpbeyJzdWJzY3JpYmVyVGVuYW50RG9tYWluIjoiY2FyYm9uLnN1cGVyIiwibmFtZSI6Ik9yZGVySW52ZW50b3J5U2VydmljZSIsImNvbnRleHQiOiJcL2ludmVudG9yeVwvMS4wLjAiLCJwdWJsaXNoZXIiOiJhZG1pbiIsInZlcnNpb24iOiIxLjAuMCIsInN1YnNjcmlwdGlvblRpZXIiOiJEZW1vIn1dLCJjb25zdW1lcktleSI6IkNIRjNxbEd4dno2d28waHNsM1ZVQm5aekRBOGEiLCJleHAiOjE1ODg2NjE4NjAsImlhdCI6MTU4ODY1ODI2MCwianRpIjoiZjgwY2VkZDctNDI0NC00MDc3LThiNTMtZWVkMTdiNWU1NmZmIn0.U4KaoPHKOcCxoeBOO9pKVEuSGLyLyA4qc9E8Hg7P_l3nF0SwBbYdlYKnJiOmlTyvUkRvqKkkgLBTrny4TvYBZbPI9-scWBZcf_7c_gvRdnsSBB788iQjVBGayyKJTFQGbjvbVIc6x3oqlPwOWg76uarPAwLHXLMZWD7bdpqDba3jlssoDE7F9npSeT3bx7XZ7eerSvR2FlZ2MsQaVcjr57oX9EcWtkHmpo-AOpqQUMsg1ZK4HgzvhkuNwkKgMtXXT-dVRjtNpqH4JzxTuLa2jkqEXculrHW7X_itxaLf1N2qna5gZVeiXbscNx5ngi_QVYmCIYWOy6vEjLmI0Sap0A",
+											"type": "string"
+										},
+										{
+											"key": "addTokenTo",
+											"value": "header",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"Order\": {\n        \"ID\": \"100500\",\n        \"Name\": \"XYZ\",\n        \"Description\": \"Sample order.\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://localhost:8243/inventory/1.0.0/100500",
+									"protocol": "https",
+									"host": [
+										"localhost"
+									],
+									"port": "8243",
+									"path": [
+										"inventory",
+										"1.0.0",
+										"100500"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "ExternalKeyValidationSvc_EP",
+			"item": [
+				{
+					"name": "Validate API Key",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userName\":\"pamod@live.com\",\n\t\"password\":\"hello\",\n\t\"oauthToken\":\"3849392jdhdgdklbhdkf\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8050/key/validate",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8050",
+							"path": [
+								"key",
+								"validate"
+							]
+						},
+						"description": "Mock external key validation endpoint"
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	]
+}

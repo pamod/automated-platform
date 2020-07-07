@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<api context="/order" name="OrderMgtAPI" xmlns="http://ws.apache.org/ns/synapse">
+    <resource methods="POST">
+        <inSequence>
+            <clone>
+                <target>
+                    <sequence>
+                        <sequence key="OrderMgtSvcSeq"/>
+                    </sequence>
+                </target>
+                <target>
+                    <sequence>
+                        <sequence key="OrderMgtDataSvcSeq"/>
+                    </sequence>
+                </target>
+            </clone>
+            <payloadFactory media-type="json">
+                <format>{
+    "Order": {
+        “Status”: “Successful” 
+    }
+}</format>
+                <args/>
+            </payloadFactory>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+    <resource methods="GET" uri-template="/view/{orderId}">
+        <inSequence>
+            <call>
+                <endpoint key="OrderMgtSvcGETEP"/>
+            </call>
+            <respond/>
+        </inSequence>
+        <outSequence/>
+        <faultSequence/>
+    </resource>
+</api>

@@ -1,0 +1,7 @@
+{
+    "Order": {
+        "ID": "100500",
+        "Name": "XYZ",
+        "Description": "Sample order."
+    }
+}

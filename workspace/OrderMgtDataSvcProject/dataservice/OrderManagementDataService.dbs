@@ -1,0 +1,24 @@
+<data name="OrderManagementDataService" serviceNamespace="http://ws.wso2.org/dataservice">
+    <query id="insert_tbl_orders_query" useConfig="OrderMgtSource">
+        <sql>INSERT INTO tbl_orders(id,name,description) VALUES(?,?,?)</sql>
+        <param name="id" ordinal="1" sqlType="STRING"/>
+        <param name="name" ordinal="2" sqlType="STRING"/>
+        <param name="description" ordinal="3" sqlType="STRING"/>
+    </query>
+    <operation name="insert_tbl_orders_operation">
+        <call-query href="insert_tbl_orders_query">
+            <with-param name="name" query-param="name"/>
+            <with-param name="description" query-param="description"/>
+            <with-param name="id" query-param="id"/>
+        </call-query>
+    </operation>
+    <config id="OrderMgtSource">
+        <property name="org.wso2.ws.dataservice.user">root</property>
+        <property name="org.wso2.ws.dataservice.password">root@123</property>
+        <property name="org.wso2.ws.dataservice.protocol">jdbc:mysql://localhost:3306/ORDERS_DEMO_DB</property>
+        <property name="org.wso2.ws.dataservice.driver">com.mysql.jdbc.Driver</property>
+        <property name="org.wso2.ws.dataservice.minpoolsize"/>
+        <property name="org.wso2.ws.dataservice.maxpoolsize"/>
+        <property name="org.wso2.ws.dataservice.validation_query"/>
+    </config>
+</data>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sequence name="OrderMgtDataSvcSeq" trace="disable" xmlns="http://ws.apache.org/ns/synapse">
+    <datamapper config="gov:datamapper/OrderDataSvcMappingConfig.dmc" inputSchema="gov:datamapper/OrderDataSvcMappingConfig_inputSchema.json" inputType="JSON" outputSchema="gov:datamapper/OrderDataSvcMappingConfig_outputSchema.json" outputType="XML" xsltStyleSheet="gov:datamapper/OrderDataSvcMappingConfig_xsltStyleSheet.xml"/>
+    <property name="ContentType" scope="axis2" type="STRING" value="application/xml"/>
+    <header name="SOAPAction" scope="transport" value="insert_tbl_orders_operation"/>
+    <call>
+        <endpoint key="OrderMgtDataSvcEP"/>
+    </call>
+</sequence>

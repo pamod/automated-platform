@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datamapper:DataMapperRoot xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:datamapper="http:///org/wso2/developerstudio/eclipse/gmf/datamapper">
+  <input>
+    <treeNode name="root" schemaDataType="OBJECT" level="1">
+      <node name="Order" schemaDataType="OBJECT" level="2">
+        <node name="ID" schemaDataType="STRING" level="3">
+          <properties key="type" value="string"/>
+          <properties key="id" value="http://wso2jsonschema.org/Order/ID"/>
+          <properties key="nullable" value="false"/>
+          <outNode>
+            <outgoingLink inNode="//@output/@treeNode.0/@node.0/@node.0/@inNode"/>
+          </outNode>
+          <inNode/>
+        </node>
+        <node name="Name" schemaDataType="STRING" level="3">
+          <properties key="type" value="string"/>
+          <properties key="id" value="http://wso2jsonschema.org/Order/Name"/>
+          <properties key="nullable" value="false"/>
+          <outNode>
+            <outgoingLink inNode="//@output/@treeNode.0/@node.0/@node.1/@inNode"/>
+          </outNode>
+          <inNode/>
+        </node>
+        <node name="Description" schemaDataType="STRING" level="3">
+          <properties key="type" value="string"/>
+          <properties key="id" value="http://wso2jsonschema.org/Order/Description"/>
+          <properties key="nullable" value="false"/>
+          <outNode>
+            <outgoingLink inNode="//@output/@treeNode.0/@node.0/@node.2/@inNode"/>
+          </outNode>
+          <inNode/>
+        </node>
+        <properties key="type" value="object"/>
+        <properties key="id" value="http://wso2jsonschema.org/Order"/>
+        <properties key="nullable" value="false"/>
+        <properties key="properties_id" value="{ID={id=http://wso2jsonschema.org/Order/ID, type=string}, Name={id=http://wso2jsonschema.org/Order/Name, type=string}, Description={id=http://wso2jsonschema.org/Order/Description, type=string}}"/>
+        <outNode/>
+        <inNode/>
+      </node>
+      <properties key="type" value="object"/>
+      <properties key="$schema" value="http://wso2.org/json-schema/wso2-data-mapper-v5.0.0/schema#"/>
+      <properties key="id" value="http://wso2jsonschema.org"/>
+      <properties key="nullable" value="false"/>
+      <outNode/>
+      <inNode/>
+    </treeNode>
+  </input>
+  <output>
+    <treeNode name="body" schemaDataType="OBJECT" level="1">
+      <node name="p:insert_tbl_orders_operation" schemaDataType="OBJECT" level="2">
+        <node name="xs:id" schemaDataType="STRING" level="3">
+          <properties key="namespaces" value="{prefix=xs, url=http://ws.wso2.org/dataservice}"/>
+          <properties key="type" value="string"/>
+          <properties key="id" value="http://wso2jsonschema.org/p:insert_tbl_orders_operation/xs:id"/>
+          <properties key="nullable" value="false"/>
+          <outNode/>
+          <inNode incomingLink="//@input/@treeNode.0/@node.0/@node.0/@outNode/@outgoingLink.0"/>
+        </node>
+        <node name="xs:name" schemaDataType="STRING" level="3">
+          <properties key="namespaces" value="{prefix=xs, url=http://ws.wso2.org/dataservice}"/>
+          <properties key="type" value="string"/>
+          <properties key="id" value="http://wso2jsonschema.org/p:insert_tbl_orders_operation/xs:name"/>
+          <properties key="nullable" value="false"/>
+          <outNode/>
+          <inNode incomingLink="//@input/@treeNode.0/@node.0/@node.1/@outNode/@outgoingLink.0"/>
+        </node>
+        <node name="xs:description" schemaDataType="STRING" level="3">
+          <properties key="namespaces" value="{prefix=xs, url=http://ws.wso2.org/dataservice}"/>
+          <properties key="type" value="string"/>
+          <properties key="id" value="http://wso2jsonschema.org/p:insert_tbl_orders_operation/xs:description"/>
+          <properties key="nullable" value="false"/>
+          <outNode/>
+          <inNode incomingLink="//@input/@treeNode.0/@node.0/@node.2/@outNode/@outgoingLink.0"/>
+        </node>
+        <properties key="namespaces" value="{prefix=p, url=http://ws.wso2.org/dataservice}"/>
+        <properties key="type" value="object"/>
+        <properties key="id" value="http://wso2jsonschema.org/p:insert_tbl_orders_operation"/>
+        <properties key="nullable" value="false"/>
+        <properties key="properties_id" value="{xs:id={id=http://wso2jsonschema.org/p:insert_tbl_orders_operation/xs:id, type=string}, xs:name={id=http://wso2jsonschema.org/p:insert_tbl_orders_operation/xs:name, type=string}, xs:description={id=http://wso2jsonschema.org/p:insert_tbl_orders_operation/xs:description, type=string}}"/>
+        <outNode/>
+        <inNode/>
+      </node>
+      <properties key="namespaces" value="{prefix=p, url=http://ws.wso2.org/dataservice},{prefix=xs, url=http://ws.wso2.org/dataservice}"/>
+      <properties key="type" value="object"/>
+      <properties key="$schema" value="http://wso2.org/json-schema/wso2-data-mapper-v5.0.0/schema#"/>
+      <properties key="id" value="http://wso2jsonschema.org"/>
+      <properties key="nullable" value="false"/>
+      <outNode/>
+      <inNode/>
+    </treeNode>
+  </output>
+</datamapper:DataMapperRoot>

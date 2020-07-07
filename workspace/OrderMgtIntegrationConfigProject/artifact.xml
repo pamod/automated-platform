@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><artifacts>
+    <artifact name="OrderMgtAPI" groupId="com.example.SampleESBProject.api" version="1.0.0" type="synapse/api" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/api/OrderMgtAPI.xml</file>
+    </artifact>
+    <artifact name="OrderMgtDataSvcSeq" groupId="com.example.SampleESBProject.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/OrderMgtDataSvcSeq.xml</file>
+    </artifact>
+    <artifact name="OrderMgtSvcSeq" groupId="com.example.SampleESBProject.sequence" version="1.0.0" type="synapse/sequence" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/sequences/OrderMgtSvcSeq.xml</file>
+    </artifact>
+    <artifact name="OrderMgtDataSvcEP" groupId="com.example.SampleESBProject.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/OrderMgtDataSvcEP.xml</file>
+    </artifact>
+    <artifact name="OrderMgtSvcEP" groupId="com.example.SampleESBProject.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/OrderMgtSvcEP.xml</file>
+    </artifact>
+    <artifact name="OrderMgtSvcGETEP" groupId="com.example.SampleESBProject.endpoint" version="1.0.0" type="synapse/endpoint" serverRole="EnterpriseServiceBus">
+        <file>src/main/synapse-config/endpoints/OrderMgtSvcGETEP.xml</file>
+    </artifact>
+</artifacts>
